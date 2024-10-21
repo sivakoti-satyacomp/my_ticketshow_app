@@ -10,20 +10,23 @@
             <div class="center"><h1>My Cine World</h1></div>
             <div class="my_panel">
                 <div class="center"><h3>Login</h3></div>
+                <form action="/login" method="POST">
                 <div class="input_form">
                     <div class="mb-3">
                         <label for="user_name" class="form-label">User name(E-Mail)</label>
-                        <input type="email" class="form-control" id="user_name" placeholder="iitm@study.ac.in">
+                        <input type="email" class="form-control" name="user_name" id="user_name" placeholder="iitm@study.ac.in">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="password">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="password">
                     </div>
                     <div class="mb-3">
-                        <button type="button" class="btn btn-primary">Login</button>
-                        New user?<a href="#">Signup</a>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                        New user?<a href="/register">Signup</a>
+                        <div class="err_msg">{{msg}}</div>
                     </div>
                 </div>
+                </form>
             </div>
 
         </div>
