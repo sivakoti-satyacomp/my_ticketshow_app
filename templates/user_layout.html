@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/styles/main.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <title>User Dashboard</title>
+    </head>
+    <body>
+        <div class="my_container">
+            <div class="center"><h1>My Cine World</h1></div>
+            <div class="my_panel">
+                <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+                    <div class="container-fluid">
+                      <div class="collapse navbar-collapse" id="navbarText">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Profile</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">Bookings</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">Logout</a>
+                          </li>
+                        </ul>
+                        <span class="navbar-text">
+                          Welcome to {{name}}
+                        </span>
+                      </div>
+                    </div>
+                  </nav>
+                  {%block content%}
+                    <!--This is from child html-->
+                 {%endblock%}
+                </div>
+            </div>
+        </body>
+    </html>
