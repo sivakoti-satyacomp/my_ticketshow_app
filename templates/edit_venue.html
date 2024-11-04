@@ -1,0 +1,31 @@
+{%extends "admin_layout.html"%} <!--Inherited all nav features-->
+{%block content%}
+            {%if venue%}
+                <div class="center"><h3>Edit Venue</h3></div>
+                <form action="/edit_venue/{{venue.id}}/{{name}}" method="POST">
+                <div class="input_form">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" name="tname" id="tname" value="{{venue.name}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" class="form-control" name="location" id="location" value="{{venue.location}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="pin_code" class="form-label">Pin code</label>
+                        <input type="number" class="form-control" name="pin_code" id="pin_code" value="{{venue.pin_code}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="capacity" class="form-label">Capacity</label>
+                        <input type="number" class="form-control" name="capacity" id="capacity" value="{{venue.capacity}}">
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a href="/delete_venue/{{venue.id}}/{{name}}" type="button" class="btn btn-danger">Delete</a>
+                        <a href="/admin/{{name}}" type="button" class="btn btn-primary">Cancel</a>
+                    </div>
+                </div>
+                </form>
+            {%endif%}
+{%endblock%}

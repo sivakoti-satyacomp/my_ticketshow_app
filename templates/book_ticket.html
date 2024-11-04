@@ -1,0 +1,46 @@
+{%extends "user_layout.html"%} <!--Inherited all nav features-->
+{%block content%}
+<script>
+    function calculateTotalPrice(tktprice){
+        document.getElementById("total_price").value=tktprice*document.getElementById("no_of_tickets").value;
+    }
+
+</script>
+                <div class="center"><h3>Book Ticket</h3></div>
+                <div class="center"><h4>Venue : {{tname}}, Movie : {{sname}} </h4></div>
+                <div class="center"><h5>Ticket price: {{tktprice}}</h5></div>
+                <form action="/book_ticket/{{uid}}/{{sid}}/{{name}}" method="POST">
+                <div class="input_form">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">User Id</label>
+                        <input type="text" class="form-control" name="uid" id="uid" value="{{uid}}" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Show Id</label>
+                        <input type="text" class="form-control" name="sid" id="sid" value="{{sid}}" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Available seats</label>
+                        <input type="text" class="form-control" name="available_seats" id="available_seats" value="{{available_seats}}" readonly>
+                    </div>
+                    {%if available_seats == 0%}
+                        <div class="mb-3">
+                            <label for="name" class="form-label">No seats are available!!</label>
+                        </div>
+                    {%else%}
+                        <div class="mb-3">
+                            <label for="name" class="form-label">No. of ticketss</label>
+                            <input type="text" class="form-control" name="no_of_tickets" id="no_of_tickets" value="0" onblur="calculateTotalPrice('{{tktprice}}')">
+                        </div>
+                    {%endif%}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Total price</label>
+                        <input type="text" class="form-control" name="total_price" id="total_price" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <a href="/user/{{name}}" type="button" class="btn btn-primary">Cancel</a>
+                    </div>
+                </div>
+                </form>
+{%endblock%}

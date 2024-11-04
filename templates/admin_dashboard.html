@@ -8,13 +8,13 @@
                         <!--Venue1 card here-->
                             <div class="card" style="width: 18rem;">
                             <div class="card-body">
-                              <h5 class="card-title">{{theatre.name}}</h5>
+                              <h5 class="card-title"><a href="/edit_venue/{{theatre.id}}/{{name}}">{{theatre.name}}</a></h5>
                               <h6 class="card-subtitle mb-2 text-muted">{{theatre.location}}</h6>
                               {%if theatre.shows%}
                                 <table>
                                 <tr><th>ID</th><th>Name</th><th>Dt/Time</th></tr>
                                 {%for show in theatre.shows%}
-                                  <tr><td>{{show.id}}</td><td>{{show.name}}</td><td>{{show.date_time}}</td></tr>
+                                  <tr><td><a href="/edit_show/{{show.id}}/{{name}}">{{show.id}}</a></td><td>{{show.name}}</td><td>{{show.date_time}}</td></tr>
                                 {%endfor%}
                                 </table>
                               {%else%}

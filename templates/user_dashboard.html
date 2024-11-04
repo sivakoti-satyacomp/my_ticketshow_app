@@ -1,68 +1,32 @@
 {%extends "user_layout.html"%} <!--Inherited all nav features-->
 {%block content%}
-                  <!--Venue1 started here-->
-                  <div class="outer_box">
-                    Venue#1
+    {%if theatres%}
+          {%for theatre in theatres%}
+                {%if theatre.shows%}
+                <div class="outer_box">
+                    {{theatre.name}}
                   <div class="container">
                     <div class="row">
-                      <div class="col">
-                        <!--Show1 card here-->
+                      {%for show in theatre.shows%}
+                      {%if show.date_time >= dt_time_now%}
+                        <div class="col">
                             <div class="card" style="width: 18rem;">
                             <div class="card-body">
-                              <h5 class="card-title">Show1</h5>
-                              <h6 class="card-subtitle mb-2 text-muted">Some action movie</h6>
-                              <button type="button" class="btn btn-outline-warning">Fast filling</button>
+                              <h5 class="card-title">{{show.name}}</h5>
+                              <h6 class="card-subtitle mb-2 text-muted">{{show.tags}}, Show time: {{show.date_time}}</h6>
+                              <a href="/book_ticket/{{uid}}/{{show.id}}/{{name}}" type="button" class="btn btn-outline-primary">Book</a>
                             </div>
                           </div>
-                        <!--End of Show1-->
-                      </div>
-                      <div class="col">
-                        <!--Show2 card here-->
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                              <h5 class="card-title">Show#2</h5>
-                              <h6 class="card-subtitle mb-2 text-muted">Commedy</h6>
-                              <button type="button" class="btn btn-outline-primary">Book</button>
-                            </div>
-                          </div>
-                        <!--End of Venue2-->
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
-                <!--Venue1 is ended-->
-                <!--Venue2 started here-->
-                <div class="outer_box">
-                  Venue#1
-                <div class="container">
-                  <div class="row">
-                    <div class="col">
-                      <!--Show1 card here-->
-                          <div class="card" style="width: 18rem;">
-                          <div class="card-body">
-                            <h5 class="card-title">Show1</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Some action movie</h6>
-                            <button type="button" class="btn btn-outline-primary">Book</button>
-                          </div>
                         </div>
-                      <!--End of Show1-->
-                    </div>
-                    <div class="col">
-                      <!--Show2 card here-->
-                      <div class="card" style="width: 18rem;">
-                          <div class="card-body">
-                            <h5 class="card-title">Show#2</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Commedy</h6>
-                            <button type="button" class="btn btn-outline-danger">Houseful</button>
-                          </div>
-                        </div>
-                      <!--End of Show2-->
-                    </div>
-                    
+                        {%endif%}
+                      {%endfor%}                      
                   </div>
                 </div>
               </div>
-              <!--Venue2 is ended-->
+              {%endif%}
+              {%endfor%}
+      {%else%}
+              <h3 class="center">Sorry, no theatres available!!</h3>
+      {%endif%}
 {%endblock%}
 

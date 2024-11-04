@@ -1,0 +1,32 @@
+{%extends "admin_layout.html"%} <!--Inherited all nav features-->
+{%block content%}
+            {%if show%}
+                <div class="center"><h3>Edit Show</h3></div>
+                <form action="/edit_show/{{show.id}}/{{name}}" method="POST">
+                <div class="input_form">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" name="mname" id="mname" value="{{show.name}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="tags" class="form-label">Tags</label>
+                        <input type="text" class="form-control" name="tags" id="tags" value="{{show.tags}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="tkt_price" class="form-label">Ticket Price</label>
+                        <input type="number" class="form-control" name="tkt_price" id="tkt_price" value="{{show.tkt_price}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dt_time" class="form-label">Date/Time</label>
+                        <input type="datetime-local" class="form-control" name="dt_time" id="dt_time" value="{{show.date_time}}">
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a href="/delete_show/{{show.id}}/{{name}}" type="button" class="btn btn-danger">Delete</a>
+                        <a href="/admin/{{name}}" type="button" class="btn btn-primary">Cancel</a>
+                    </div>
+                </div>
+                </form>
+            {%endif%}
+{%endblock%}
