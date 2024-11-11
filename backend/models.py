@@ -25,6 +25,7 @@ class Theatre(db.Model):
     location=db.Column(db.String,nullable=False)
     pin_code=db.Column(db.Integer,nullable=False)
     capacity=db.Column(db.Integer,nullable=False)
+    venue_pic_url=db.Column(db.String,nullable=True,default="None")
     shows=db.relationship("Show",cascade="all,delete",backref="theatre",lazy=True) #Theatre can access all of its shows
 
 #Entity3 show table

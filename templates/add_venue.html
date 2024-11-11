@@ -1,7 +1,7 @@
 {%extends "admin_layout.html"%} <!--Inherited all nav features-->
 {%block content%}
                 <div class="center"><h3>Add Venue</h3></div>
-                <form action="#" method="POST">
+                <form action="#" enctype="multipart/form-data" method="POST">
                 <div class="input_form">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
@@ -18,6 +18,10 @@
                     <div class="mb-3">
                         <label for="capacity" class="form-label">Capacity</label>
                         <input type="number" class="form-control" name="capacity" id="capacity" placeholder="00">
+                    </div>
+                    <div class="mb-3">
+                        <label for="file_upload" class="form-label">File</label>
+                        <input type="file" class="form-control" name="file_upload" id="file_upload">
                     </div>
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary">Submit</button>

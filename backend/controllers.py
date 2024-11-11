@@ -4,6 +4,8 @@ from .models import *
 from flask import current_app as app
 from datetime import datetime
 from sqlalchemy import func
+from werkzeug.utils import secure_filename
+import matplotlib.pyplot as plt
 
 @app.route("/")
 def home():
@@ -66,7 +68,13 @@ def add_venue(name):
         location=request.form.get("location")
         pin_code=request.form.get("pin_code")
         capacity=request.form.get("capacity")
-        new_theatre=Theatre(name=vname,location=location,pin_code=pin_code,capacity=capacity)
+        file=request.files["file_upload"]
+        url=""
+        if file.filename:
+            file_name=secure_filename(file.filename) #Verification of the file is done
+            url='./uploaded_files/'+vname+"_"+file_name
+            file.save(url)
+        new_theatre=Theatre(name=vname,location=location,pin_code=pin_code,capacity=capacity,venue_pic_url=url)
         db.session.add(new_theatre)
         db.session.commit()
         return redirect(url_for("admin_dashboard",name=name))
@@ -175,6 +183,15 @@ def book_ticket(uid,sid,name):
     
     return render_template("book_ticket.html",uid=uid,sid=sid,name=name,tname=theatre.name,sname=show.name,available_seats=available_seats,tktprice=show.tkt_price)
 
+
+@app.route("/admin_summary")
+def admin_summary():
+    plot=get_theatres_summary()
+    plot.savefig("./static/images/theatre_summary.jpeg")
+    plot.clf()
+    return render_template("admin_summary.html")
+
+
 #Other supported functions
 def get_theatres():
     theatres=Theatre.query.all()
@@ -196,3 +213,20 @@ def get_venue(id):
 def get_show(id):
     show=Show.query.filter_by(id=id).first()
     return show
+
+def get_theatres_summary():
+    theatres=get_theatres()
+    summary={}
+    for t in theatres:
+        summary[t.name]=t.capacity
+    x_names=list(summary.keys())
+    y_capacities=list(summary.values())
+    plt.bar(x_names,y_capacities,color="blue", width=0.4)
+    plt.title("Theatres/Capacities")
+    plt.xlabel("Theatre")
+    plt.ylabel("Capacity")
+    return plt
+
+
+#JSON data - its simple dictionary key:value
+#json data can be used by any front end frameworks(vuejs/react/angular)
